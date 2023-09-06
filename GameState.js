@@ -1,34 +1,3 @@
-const COLORS = [
-    "red",
-    "blue",
-    "green",
-    "orange",
-    "purple",
-    "red",
-    "blue",
-    "green",
-    "orange",
-    "purple"
-];
-
-let cards = [
-    {groupId: 1, color: randomColor()},
-    // {groupId: 2, color: randomColor()},
-    // {groupId: 3, color: randomColor()},
-    // {groupId: 4, color: randomColor()},
-    // {groupId: 5, color: randomColor()},
-    // {groupId: 6, color: randomColor()},
-    // {groupId: 7, color: randomColor()},
-]
-cards = cards.concat(cards);
-
-function randomColor() {
-    let r = Math.floor(Math.random() * 256);
-    let g = Math.floor(Math.random() * 256);
-    let b = Math.floor(Math.random() * 256);
-    return `rgb(${r},${g},${b})`
-}
-
 /**
  * Shuffles the array in place.
  * @param {Array} array The array to shuffle.

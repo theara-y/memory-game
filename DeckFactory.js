@@ -23,3 +23,16 @@ export default class DeckFactory {
         return cards;
     }
 }
+
+// const COLORS = [
+//     "red",
+//     "blue",
+//     "green",
+//     "orange",
+//     "purple",
+//     "red",
+//     "blue",
+//     "green",
+//     "orange",
+//     "purple"
+// ];
