@@ -2,7 +2,7 @@ import GameGraphics from "./GameGraphics.js";
 import GameState from "./GameState.js";
 import DeckFactory from "./DeckFactory.js";
 
-const N_PAIRS = 5;
+let N_PAIRS = 1;
 const graphics = new GameGraphics(handleClick);
 let state = GameState.newGame(DeckFactory.newDeck(N_PAIRS));
 
@@ -12,12 +12,12 @@ function handleClick(event) {
     }
     else if(event.target.classList.contains("ui")) {
       graphics.clear()
-      state = GameState.newGame(DeckFactory.newDeck(N_PAIRS));
+      state = GameState.newGame(DeckFactory.newDeck(N_PAIRS++));
       graphics.drawCards(state);
     }
 }
 
-graphics.drawCards(state);
+graphics.drawUI("Flipping Cards", "S T A R T", "By Theara Ya");
 
 const WAIT_TIME = 1000;
 
@@ -42,7 +42,7 @@ function validateClick(card) {
 
                   setTimeout(() => {
                     graphics.clear();
-                    graphics.drawGameOverScreen();
+                    graphics.drawUI("You win!", "Try Again?", "Click anywhere to restart...");
                   }, WAIT_TIME/2)
                 }
             }

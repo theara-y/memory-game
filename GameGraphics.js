@@ -69,13 +69,34 @@ export default class GameGraphics {
         }, 33);
     }
   
-    drawGameOverScreen(text) {
+    drawUI(headerText, subText, caption) {
         let h1 = createElt("h1", {class: "ui"});
-        h1.textContent = "You win!";
+        h1.textContent = headerText;
+        let p1 = createElt("p", {class: "ui"});
+        p1.textContent = subText;
+        let c1 = createElt("p", {class: "ui"});
+        c1.textContent = caption;
+
+        let gameOverDiv = createElt("div", {id: "ui", class: "ui"},
+            createElt("div", {class: "flex-container ui"},
+                createElt("div", {id: "ui-box", class: "ui"},
+                    h1, p1
+                ),
+                c1
+            )
+        );
+
+        this.gameContainer.appendChild(gameOverDiv);
+        gameOverDiv.addEventListener("click", this.clickHandler);
+    }
+
+    drawStartScreen() {
+        let h1 = createElt("h1", {class: "ui"});
+        h1.textContent = "Match the Colors!";
         let pScore = createElt("p", {class: "ui"});
-        pScore.textContent = "Score: 32";
+        pScore.textContent = "Start Game";
         let pRestart = createElt("p", {class: "ui"});
-        pRestart.textContent = "Click to restart...";
+        pRestart.textContent = "By Theara Ya";
 
         let gameOverDiv = createElt("div", {id: "ui", class: "ui"},
             createElt("div", {class: "flex-container ui"},
