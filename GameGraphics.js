@@ -25,12 +25,18 @@ export default class GameGraphics {
 
     drawCards(state) {
         for (let card of state.cards) {
+            let groupId = card.groupId;
+            let color = card.color;
             const cardDiv = createElt("div", {class: "card"},
-                createElt("div", {class: "content", 'data-groupId': card}, 
-                    createElt("div", {class: `front ${card}`}),
-                    createElt("div", {class: "back"})
+                createElt("div", {class: "content", 'data-groupId': groupId}, 
+                    createElt("div", {class: `front`}),
+                    createElt("div", {class: "back"},
+                        createElt("img", {src: "./imgs/test.jpg"})
+                    )
                 )
             );
+
+            cardDiv.firstElementChild.firstElementChild.style.background = color;
         
             cardDiv.addEventListener("click", this.clickHandler);
         

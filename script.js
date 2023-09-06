@@ -5,7 +5,7 @@ const graphics = new GameGraphics(handleClick);
 const state = new GameState();
 
 function handleClick(event) {
-    validateClick(event.target.parentElement);
+    validateClick(event.target.parentElement.parentElement);
 }
 
 graphics.drawCards(state);
@@ -21,11 +21,13 @@ function validateClick(card) {
             let isMatch = state.checkMatch();
             state.newGuesses();
             if(!isMatch) {
-              setTimeout(() => {
-                  graphics.flipCards(...guesses);
-              }, WAIT_TIME);
+                setTimeout(() => {
+                    graphics.flipCards(...guesses);
+                }, WAIT_TIME);
             } else {
-              if(state.checkWinCondition()) console.log("You win the game!")
+                if(state.checkWinCondition()) {
+                  console.log("You win the game!")
+                }
             }
         }
     }
