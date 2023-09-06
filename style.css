@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#game {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.start {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: red;
+  z-index: 1;
+  display: none;
+}
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+  gap: 10px 30px;
+  height: 100%;
+}
+
+
+.card {
+  /* border: 1px solid black; */
+  width: 150px;
+  height: 220px;
+  perspective: 1000px;
+}
+
+.content {
+  border: 1px solid black;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease-out;
+  transform-style: preserve-3d;
+}
+
+.show {
+  transition: all 0.3s ease-out;
+  transform: rotateY(180deg);
+}
+
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.back {
+  background-color: gray;
+  box-shadow: 5px 5px 10px black;
+}
+
+.front {
+  transform: rotateY(180deg);
+  box-shadow: 5px 5px 10px white;
+}
+
+.red {
+  background: red;
+}
+
+.blue {
+  background: blue;
+}
+
+.green {
+  background: green;
+}
+
+.orange {
+  background: orange;
+}
+
+.purple {
+  background: purple;
+}
