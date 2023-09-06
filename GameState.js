@@ -13,12 +13,12 @@ const COLORS = [
 
 let cards = [
     {groupId: 1, color: randomColor()},
-    {groupId: 2, color: randomColor()},
-    {groupId: 3, color: randomColor()},
-    {groupId: 4, color: randomColor()},
-    {groupId: 5, color: randomColor()},
-    {groupId: 6, color: randomColor()},
-    {groupId: 7, color: randomColor()},
+    // {groupId: 2, color: randomColor()},
+    // {groupId: 3, color: randomColor()},
+    // {groupId: 4, color: randomColor()},
+    // {groupId: 5, color: randomColor()},
+    // {groupId: 6, color: randomColor()},
+    // {groupId: 7, color: randomColor()},
 ]
 cards = cards.concat(cards);
 
@@ -47,10 +47,14 @@ function shuffle(array) {
 }
 
 export default class GameState {
-    constructor() {
+    constructor(cards) {
         this.cards = shuffle(cards);
         this.guesses = [];
         this.foundMatches = 0;
+    }
+
+    static newGame(cards) {
+        return new GameState(cards);
     }
 
     newGuesses() {

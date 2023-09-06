@@ -1,11 +1,20 @@
 import GameGraphics from "./GameGraphics.js";
 import GameState from "./GameState.js";
+import DeckFactory from "./DeckFactory.js";
 
+const N_PAIRS = 5;
 const graphics = new GameGraphics(handleClick);
-const state = new GameState();
+let state = GameState.newGame(DeckFactory.newDeck(N_PAIRS));
 
 function handleClick(event) {
-    validateClick(event.target.parentElement.parentElement);
+    if(event.target.classList.contains("game")) {
+      validateClick(event.target.parentElement.parentElement);
+    }
+    else if(event.target.classList.contains("ui")) {
+      graphics.clear()
+      state = GameState.newGame(DeckFactory.newDeck(N_PAIRS));
+      graphics.drawCards(state);
+    }
 }
 
 graphics.drawCards(state);
@@ -19,14 +28,22 @@ function validateClick(card) {
         let guesses = state.getGuesses();
         if(guesses.length == 2) {
             let isMatch = state.checkMatch();
-            state.newGuesses();
             if(!isMatch) {
                 setTimeout(() => {
                     graphics.flipCards(...guesses);
+                    setTimeout(() => {
+                      state.newGuesses();
+                    }, 50)
                 }, WAIT_TIME);
             } else {
+                state.newGuesses();
                 if(state.checkWinCondition()) {
                   console.log("You win the game!")
+
+                  setTimeout(() => {
+                    graphics.clear();
+                    graphics.drawGameOverScreen();
+                  }, WAIT_TIME/2)
                 }
             }
         }

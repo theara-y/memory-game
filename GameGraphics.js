@@ -23,15 +23,19 @@ export default class GameGraphics {
         this.gameContainer = document.querySelector("#game .flex-container");
     }
 
+    clear() {
+        this.gameContainer.innerHTML = "";
+    }
+
     drawCards(state) {
         for (let card of state.cards) {
             let groupId = card.groupId;
             let color = card.color;
-            const cardDiv = createElt("div", {class: "card"},
-                createElt("div", {class: "content", 'data-groupId': groupId}, 
-                    createElt("div", {class: `front`}),
-                    createElt("div", {class: "back"},
-                        createElt("img", {src: "./imgs/test.jpg"})
+            const cardDiv = createElt("div", {class: "game card"},
+                createElt("div", {class: "game content", 'data-groupId': groupId}, 
+                    createElt("div", {class: `game front`}),
+                    createElt("div", {class: "game back"},
+                        createElt("img", {class: "game", src: "./imgs/test.jpg"})
                     )
                 )
             );
@@ -44,8 +48,25 @@ export default class GameGraphics {
         }
     }
   
-    toggleHide(elt) {
-        elt.classList.toggle("hide")
+    drawGameOverScreen(text) {
+        let h1 = createElt("h1", {class: "ui"});
+        h1.textContent = "You win!";
+        let pScore = createElt("p", {class: "ui"});
+        pScore.textContent = "Score: 32";
+        let pRestart = createElt("p", {class: "ui"});
+        pRestart.textContent = "Click to restart...";
+
+        let gameOverDiv = createElt("div", {id: "ui", class: "ui"},
+            createElt("div", {class: "flex-container ui"},
+                createElt("div", {id: "ui-box", class: "ui"},
+                    h1, pScore
+                ),
+                pRestart
+            )
+        );
+
+        this.gameContainer.appendChild(gameOverDiv);
+        gameOverDiv.addEventListener("click", this.clickHandler);
     }
   
     flipCards(...elt) {
