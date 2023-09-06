@@ -65,7 +65,6 @@
 
 
 .card {
-  /* border: 1px solid black; */
   width: 150px;
   height: 150px;
   perspective: 1000px;
@@ -81,7 +80,7 @@
 }
 
 .flip {
-  transition: all 0.3s ease-out;
+  transition: all 0.1s ease-out;
   transform: rotateY(180deg);
 }
 
@@ -108,24 +107,4 @@
 .front {
   transform: rotateY(180deg);
   box-shadow: 5px 5px 10px white;
-}
-
-.red {
-  background: red;
-}
-
-.blue {
-  background: blue;
-}
-
-.green {
-  background: green;
-}
-
-.orange {
-  background: orange;
-}
-
-.purple {
-  background: purple;
 }

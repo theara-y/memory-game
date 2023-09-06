@@ -46,7 +46,7 @@ function validateClick(card) {
 
                   setTimeout(() => {
                     graphics.clear();
-                    graphics.drawUI("You win!", "Try Again?", "Click anywhere to restart...");
+                    graphics.drawUI("You win!", "Continue?", "Click anywhere to restart...");
                   }, WAIT_TIME/2)
                 }
             }
