@@ -31,34 +31,34 @@ function shuffle(array) {
 export default class GameState {
     constructor() {
         this.cards = shuffle(COLORS);
-        this.guessedCards = [];
+        this.guesses = [];
     }
 
-    resetGuesses() {
-        let resetCards = this.guessedCards;
-        console.log(resetCards);
-        this.guessedCards = [];
-        return resetCards;
-    }
+    // resetGuesses() {
+    //     let resetCards = this.guessedCards;
+    //     console.log(resetCards);
+    //     this.guessedCards = [];
+    //     return resetCards;
+    // }
 
-    checkCard(card) {
-        if(this.guessedCards.length < 2) {
+    addGuess(card) {
+        if(this.guesses.length < 2) {
             if(!card.classList.contains("flip")) {
-                this.guessedCards.push(card);
+                this.guesses.push(card);
                 return true;
             }
         }
         return false;
     }
 
-    checkMatch() {
-        if(this.guessedCards.length == 2) {
-            let [groupId1, groupId2] = this.guessedCards.map(card => card.getAttribute("data-groupId"));
-            if(groupId1 == groupId2) {
-                return true;
-            }
-            return false;
-        }
-        return true;
-    }
+    // checkMatch() {
+    //     if(this.guessedCards.length == 2) {
+    //         let [groupId1, groupId2] = this.guessedCards.map(card => card.getAttribute("data-groupId"));
+    //         if(groupId1 == groupId2) {
+    //             return true;
+    //         }
+    //         return false;
+    //     }
+    //     return true;
+    // }
 }

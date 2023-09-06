@@ -23,8 +23,8 @@ export default class GameGraphics {
         this.gameContainer = document.querySelector("#game .flex-container");
     }
 
-    drawCards(cards) {
-        for (let card of cards) {
+    drawCards(state) {
+        for (let card of state.cards) {
             const cardDiv = createElt("div", {class: "card"},
                 createElt("div", {class: "content", 'data-groupId': card}, 
                     createElt("div", {class: `front ${card}`}),
