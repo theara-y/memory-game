@@ -4,20 +4,24 @@ import DeckFactory from "./DeckFactory.js";
 
 let N_PAIRS = 1;
 const graphics = new GameGraphics(handleClick);
-let state = GameState.newGame(DeckFactory.newDeck(N_PAIRS));
+let state = GameState.newGame(DeckFactory.newDeck(N_PAIRS), "paused");
 
 function handleClick(event) {
-    if(event.target.classList.contains("game")) {
+    if(state.getStatus() == "playing") {
       validateClick(event.target.parentElement.parentElement);
     }
-    else if(event.target.classList.contains("ui")) {
+    else {
       graphics.clear()
-      state = GameState.newGame(DeckFactory.newDeck(N_PAIRS++));
+      state = GameState.newGame(DeckFactory.newDeck(N_PAIRS++), "playing");
       graphics.drawCards(state);
     }
 }
 
-graphics.drawUI("Flipping Cards", "S T A R T", "By Theara Ya");
+if(state.getStatus() != "playing") {
+  graphics.drawUI("Flipping Cards", "S T A R T", "By Theara Ya");
+} else {
+  graphics.drawCards(state);
+}
 
 const WAIT_TIME = 1000;
 

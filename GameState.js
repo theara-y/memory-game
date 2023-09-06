@@ -16,14 +16,23 @@ function shuffle(array) {
 }
 
 export default class GameState {
-    constructor(cards) {
+    constructor(cards, status) {
+        this.status = status;
         this.cards = shuffle(cards);
         this.guesses = [];
         this.foundMatches = 0;
     }
 
-    static newGame(cards) {
-        return new GameState(cards);
+    static newGame(cards, status) {
+        return new GameState(cards, status);
+    }
+
+    getStatus() {
+        return this.status;
+    }
+
+    setStatus(status) {
+        this.status = status;
     }
 
     newGuesses() {
@@ -54,6 +63,10 @@ export default class GameState {
     }
 
     checkWinCondition() {
-        return this.foundMatches == this.cards.length;
+        if(this.foundMatches == this.cards.length) {
+            this.status = "paused";
+            return true;
+        }
+        return false;
     }
 }
