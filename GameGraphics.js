@@ -89,27 +89,6 @@ export default class GameGraphics {
         this.gameContainer.appendChild(gameOverDiv);
         gameOverDiv.addEventListener("click", this.clickHandler);
     }
-
-    // drawStartScreen() {
-    //     let h1 = createElt("h1", {class: "ui"});
-    //     h1.textContent = "Match the Colors!";
-    //     let pScore = createElt("p", {class: "ui"});
-    //     pScore.textContent = "Start Game";
-    //     let pRestart = createElt("p", {class: "ui"});
-    //     pRestart.textContent = "By Theara Ya";
-
-    //     let gameOverDiv = createElt("div", {id: "ui", class: "ui"},
-    //         createElt("div", {class: "flex-container ui"},
-    //             createElt("div", {id: "ui-box", class: "ui"},
-    //                 h1, pScore
-    //             ),
-    //             pRestart
-    //         )
-    //     );
-
-    //     this.gameContainer.appendChild(gameOverDiv);
-    //     gameOverDiv.addEventListener("click", this.clickHandler);
-    // }
   
     flipCards(...elt) {
         elt.forEach(e => e.classList.toggle("flip"));
