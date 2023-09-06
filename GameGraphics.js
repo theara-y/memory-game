@@ -1,34 +1,40 @@
-class GameGraphics {
-    /**
+/**
      * Element factory to build elements. 
      * @param {String} name Tag name of the element to be created.
      * @param {Map} attrs Attributes to add to the element.
      * @param {Element} children Child elements to append to the element.
      * @returns elt Returns the element.
      */
-    createElt(name, attrs, ...children) {
-        const elt = document.createElement(name);
-        for(let key in attrs) {
-            elt.setAttribute(key, attrs[key]);
-        }
-        for(let child of children) {
-            elt.appendChild(child);
-        }
-        return elt;
+function createElt(name, attrs, ...children) {
+    const elt = document.createElement(name);
+    for(let key in attrs) {
+        elt.setAttribute(key, attrs[key]);
+    }
+    for(let child of children) {
+        elt.appendChild(child);
+    }
+    return elt;
+}
+
+export default class GameGraphics {
+    constructor(clickHandler) {
+        this.clickHandler = clickHandler;
+
+        this.gameContainer = document.querySelector("#game .flex-container");
     }
 
     drawCards(cards) {
         for (let card of cards) {
             const cardDiv = createElt("div", {class: "card"},
                 createElt("div", {class: "content", 'data-groupId': card}, 
-                    createElt("div", {class: `front ${color}`}),
+                    createElt("div", {class: `front ${card}`}),
                     createElt("div", {class: "back"})
                 )
             );
         
-            cardDiv.addEventListener("click", handleCardClick);
+            cardDiv.addEventListener("click", this.clickHandler);
         
-            gameContainer.appendChild(cardDiv);
+            this.gameContainer.appendChild(cardDiv);
         }
     }
   
@@ -36,7 +42,7 @@ class GameGraphics {
         elt.classList.toggle("hide")
     }
   
-    toggleFlip(elt) {
-        elt.classList.toggle("flip")
+    flipCards(...elt) {
+        elt.forEach(e => e.classList.toggle("flip"));
     }
 }
