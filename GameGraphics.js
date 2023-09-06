@@ -32,7 +32,7 @@ export default class GameGraphics {
             let groupId = card.groupId;
             let color = card.color;
             const cardDiv = createElt("div", {class: "game card"},
-                createElt("div", {class: "game content", 'data-groupId': groupId}, 
+                createElt("div", {class: "game content fly", 'data-groupId': groupId}, 
                     createElt("div", {class: `game front`}),
                     createElt("div", {class: "game back"},
                         createElt("img", {class: "game", src: "./imgs/test.jpg"})
@@ -46,6 +46,27 @@ export default class GameGraphics {
         
             this.gameContainer.appendChild(cardDiv);
         }
+
+        this.dealCards();
+    }
+
+    dealCards() {
+        let flyingCards = []
+        for(let flyingCard of document.querySelectorAll(".fly")) {
+            flyingCards.push(flyingCard);
+        }
+
+        let counter = flyingCards.length;
+
+        let id = setInterval(() => {
+            let randomIndex = Math.floor(Math.random() * counter);
+            flyingCards[randomIndex].classList.remove("fly");
+            counter--
+            if(counter == 0) {
+                clearInterval(id);
+            }
+            flyingCards = flyingCards.slice(0, randomIndex).concat(flyingCards.slice(randomIndex + 1));
+        }, 33);
     }
   
     drawGameOverScreen(text) {
