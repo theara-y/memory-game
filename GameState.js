@@ -34,12 +34,9 @@ export default class GameState {
         this.guesses = [];
     }
 
-    // resetGuesses() {
-    //     let resetCards = this.guessedCards;
-    //     console.log(resetCards);
-    //     this.guessedCards = [];
-    //     return resetCards;
-    // }
+    newGuesses() {
+        this.guesses = [];
+    }
 
     addGuess(card) {
         if(this.guesses.length < 2) {
@@ -51,14 +48,12 @@ export default class GameState {
         return false;
     }
 
-    // checkMatch() {
-    //     if(this.guessedCards.length == 2) {
-    //         let [groupId1, groupId2] = this.guessedCards.map(card => card.getAttribute("data-groupId"));
-    //         if(groupId1 == groupId2) {
-    //             return true;
-    //         }
-    //         return false;
-    //     }
-    //     return true;
-    // }
+    getGuesses() {
+        return Array.from(this.guesses);
+    }
+
+    checkMatch() {
+        let [id1, id2] = this.guesses.map(card => card.getAttribute("data-groupId"));
+        return id1 == id2;
+    }
 }
