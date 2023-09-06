@@ -32,6 +32,7 @@ export default class GameState {
     constructor() {
         this.cards = shuffle(COLORS);
         this.guesses = [];
+        this.foundMatches = 0;
     }
 
     newGuesses() {
@@ -54,6 +55,14 @@ export default class GameState {
 
     checkMatch() {
         let [id1, id2] = this.guesses.map(card => card.getAttribute("data-groupId"));
+        if(id1 == id2) {
+            this.foundMatches += 2;
+            return true;
+        }
         return id1 == id2;
+    }
+
+    checkWinCondition() {
+        return this.foundMatches == this.cards.length;
     }
 }

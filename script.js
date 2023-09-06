@@ -24,6 +24,8 @@ function validateClick(card) {
               setTimeout(() => {
                   graphics.flipCards(...guesses);
               }, WAIT_TIME);
+            } else {
+              if(state.checkWinCondition()) console.log("You win the game!")
             }
         }
     }
