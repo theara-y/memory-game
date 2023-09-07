@@ -27,6 +27,12 @@ export default class GameGraphics {
         this.gameContainer.innerHTML = "";
     }
 
+    drawGame(state) {
+        this.drawCards(state);
+        this.dealCards();
+        this.drawHealth(state);
+    }
+
     drawCards(state) {
         for (let card of state.cards) {
             let groupId = card.groupId;
@@ -35,7 +41,7 @@ export default class GameGraphics {
                 createElt("div", {class: "game content fly", 'data-groupId': groupId}, 
                     createElt("div", {class: `game front`}),
                     createElt("div", {class: "game back"},
-                        createElt("img", {class: "game", src: "./imgs/test.jpg"})
+                        createElt("img", {class: "game", src: `./imgs/MKT_ItemBox.gif`})
                     )
                 )
             );
@@ -46,8 +52,6 @@ export default class GameGraphics {
         
             this.gameContainer.appendChild(cardDiv);
         }
-
-        this.dealCards();
     }
 
     dealCards() {
@@ -67,6 +71,29 @@ export default class GameGraphics {
             }
             flyingCards = flyingCards.slice(0, randomIndex).concat(flyingCards.slice(randomIndex + 1));
         }, 33);
+    }
+
+    drawHealth(state) {
+        let heart = document.getElementById("heart");
+        let leftHeart = document.getElementById("left-heart");
+        let rightHeart = document.getElementById("right-heart");
+        if(heart != null) {
+            heart.remove();
+        }
+        if(leftHeart != null) {
+            leftHeart.remove();
+        }
+        if(rightHeart != null) {
+            rightHeart.remove();
+        }
+
+        leftHeart = createElt("div", {id: "left-heart"});
+        rightHeart = createElt("div", {id: "right-heart"});
+        heart = createElt("div", {id: "heart"});
+        heart.innerText = state.health;
+        heart.appendChild(leftHeart);
+        heart.appendChild(rightHeart);
+        this.gameContainer.append(heart);
     }
   
     drawUI(headerText, subText, caption) {

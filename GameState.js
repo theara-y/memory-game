@@ -21,6 +21,24 @@ export default class GameState {
         this.cards = shuffle(cards);
         this.guesses = [];
         this.foundMatches = 0;
+        this.level = this.cards.length/2;
+        this.health = this.level;
+    }
+
+    getBest() {
+        return localStorage.getItem("best") || 0;
+    }
+
+    setBest(level) {
+        level--;
+        console.log("completed level", level);
+        let best = localStorage.getItem("best") || 0;
+        console.log("best level", best);
+        if(level > best) {
+            localStorage.setItem("best", level)
+            best = level;
+        }
+        return best;
     }
 
     static newGame(cards, status) {
@@ -33,6 +51,10 @@ export default class GameState {
 
     setStatus(status) {
         this.status = status;
+    }
+
+    getHealth() {
+        return this.health;
     }
 
     newGuesses() {
@@ -59,7 +81,8 @@ export default class GameState {
             this.foundMatches += 2;
             return true;
         }
-        return id1 == id2;
+        this.health -= 1;
+        return false;
     }
 
     checkWinCondition() {

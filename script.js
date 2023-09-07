@@ -12,15 +12,15 @@ function handleClick(event) {
     }
     else {
       graphics.clear()
-      state = GameState.newGame(DeckFactory.newDeck(N_PAIRS++), "playing");
-      graphics.drawCards(state);
+      state = GameState.newGame(DeckFactory.newDeck(N_PAIRS), "playing");
+      graphics.drawGame(state);
     }
 }
 
 if(state.getStatus() != "playing") {
-  graphics.drawUI("Flipping Cards", "S T A R T", "By Theara Ya");
+  graphics.drawUI("Memory Game", "S T A R T", "By Theara Ya");
 } else {
-  graphics.drawCards(state);
+  graphics.drawGame(state);
 }
 
 const WAIT_TIME = 1000;
@@ -33,7 +33,14 @@ function validateClick(card) {
         if(guesses.length == 2) {
             let isMatch = state.checkMatch();
             if(!isMatch) {
+                graphics.drawHealth(state);
                 setTimeout(() => {
+                    if(state.getHealth() == 0) {
+                      graphics.clear();
+                      graphics.drawUI(`=< Level ${--N_PAIRS} >=`, `Best: ${state.getBest()}`, "Click anywhere to continue.");
+                      state.setStatus("paused");
+                      return;
+                    }
                     graphics.flipCards(...guesses);
                     setTimeout(() => {
                       state.newGuesses();
@@ -46,7 +53,7 @@ function validateClick(card) {
 
                   setTimeout(() => {
                     graphics.clear();
-                    graphics.drawUI("You win!", "Continue?", "Click anywhere to restart...");
+                    graphics.drawUI(`=> Level ${++N_PAIRS} <=`, `Best: ${state.setBest(N_PAIRS)}`, "Click anywhere to begin.");
                   }, WAIT_TIME/2)
                 }
             }
